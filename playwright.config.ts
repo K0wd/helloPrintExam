@@ -6,13 +6,17 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
+  timeout: 60000,
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
     ['list']
   ],
   use: {
-    baseURL: 'https://www.helloprint.com',
+    baseURL: 'https://www.helloprint.ie',
     headless: false,
+    launchOptions: {
+      slowMo: 0,
+    },
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -35,4 +39,3 @@ export default defineConfig({
     },
   ],
 });
-
